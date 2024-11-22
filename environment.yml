@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   # Python
-  - python >=3.10
+#  - python >=3.10
   # Required
   - cartopy
   - cftime
@@ -20,6 +20,3 @@ dependencies:
   - xarray
   - xcube >= 1.4.0
   - xcube-cci >= 0.11.1
-  # Test libs
-  - pytest
-  - pytest-cov
