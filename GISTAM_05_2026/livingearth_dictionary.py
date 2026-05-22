@@ -1010,6 +1010,28 @@ level3_gainloss_labels = {
     220216: "Water to Bare surface"
 }
 
+level3_nochange_colours = [
+    "#FFFFFF",  # 0 Conversions
+    "#ACBC2D",  # To Cultivated Terrestrial Vegetation
+    "#0E7912",  # To Natural Terrestrial Vegetation
+    "#4EEEE8",  # To Cultivated Aquatic Vegetation
+    "#1EBF79",  # To Natural Aquatic Vegetation
+    "#DA5C69",  # To Artificial Surface
+    "#F3AB69",  # To Bare Surface
+    "#1A54B9",  # To Water
+]
+
+level3_nochange_labels = {
+    0: "Conversions",
+    111111: "Cultivated Terrestrial Vegetation",
+    112112: "Natural Terrestrial Vegetation",
+    123123: "Cultivated Aquatic Vegetation",
+    124124: "Natural Aquatic Vegetation",
+    215215: "Artificial Surface",
+    216216: "Bare Surface",
+    220220: "Water",
+}
+
 lifeform_change_colours = [
     "#FFFFFF",  # 0 Remained non-vegetated
     "#C80000",  # 1 Non-vegetated to Woody
@@ -1035,101 +1057,184 @@ lifeform_change_labels = {
     22: "Remained herbaceous",
 }
 
-cover_change_colours = [
-    "#FFFFFF",  # 0 No Data / Not vegetated
+# cover_change_colours = [
+#     "#FFFFFF",  # 0 No Data / Not vegetated
     
-    # Bare -> covers
-    "#FDB2F4", #900: "Bare to non data"
-    "#D0F7C9", #910: "Bare to > 65 % cover",
-    "#D0F7D6", #912: "Bare to to 40 to 65 % cover",
-    "#D0F7E1", #913: "Bare to to 15 to 40 % cover",
-    "#D0F7F8", #915: "Bare to 4 to 15 % cover",
-    "#F7D3E6", #916: "Bare to 1 to 4 % cover",
+#     # Bare -> covers
+#     # "#FDB2F4", #900: "Bare to non data"
+#     # "#D0F7C9", #910: "Bare to > 65 % cover",
+#     # "#D0F7D6", #912: "Bare to to 40 to 65 % cover",
+#     # "#D0F7E1", #913: "Bare to to 15 to 40 % cover",
+#     # "#D0F7F8", #915: "Bare to 4 to 15 % cover",
+#     # "#F7D3E6", #916: "Bare to 1 to 4 % cover",
 
-    # >65 -> *
-    "#D1F8E7",  #1000: "> 65 % to no data" 
-    "#F7D3E6",  #1009> 65 % to bare",
-    "#7D7D7D",  # 1010 Remained as > 65 % cover
-    "#E1AF19",  # 1012 > 65 % to 40 to 65 % cover
-    "#C87D19",  # 1013 > 65 % to 15 to 40 % cover
-    "#964B00",  # 1015 > 65 % to 4 to 15 % cover
-    "#644B19",  # 1016 > 65 % to 1 to 4 % cover
+#     # >65 -> *
+#     "#D1F8E7",  #1000: "> 65 % to no data" 
+#     # "#F7D3E6",  #1009> 65 % to bare",
+#     "#7D7D7D",  # 1010 Remained as > 65 % cover
+#     "#E1AF19",  # 1012 > 65 % to 40 to 65 % cover
+#     "#C87D19",  # 1013 > 65 % to 15 to 40 % cover
+#     "#964B00",  # 1015 > 65 % to 4 to 15 % cover
+#     "#644B19",  # 1016 > 65 % to 1 to 4 % cover
 
-    # 40–65 -> *
-    "#D1F8F4",  # 1200: "40 to 65 % to no data" 
-    "#F7E0E6",  #1209:  "40 to 65 % cover to bare",
-    "#4BC864",  # 1210 40 to 65 % to > 65 % cover
-    "#969696",  # 1212 Remained as 40 to 65 % cover
-    "#FA964B",  # 1213 40 to 65 % to 15 to 40 % cover
-    "#C87D4B",  # 1215 40 to 65 % to 4 to 15 % cover
-    "#AF7D32",  # 1216 40 to 65 % to 1 to 4 % cover
+#     # 40–65 -> *
+#     "#D1F8F4",  # 1200: "40 to 65 % to no data" 
+#     # "#F7E0E6",  #1209:  "40 to 65 % cover to bare",
+#     "#4BC864",  # 1210 40 to 65 % to > 65 % cover
+#     "#969696",  # 1212 Remained as 40 to 65 % cover
+#     "#FA964B",  # 1213 40 to 65 % to 15 to 40 % cover
+#     "#C87D4B",  # 1215 40 to 65 % to 4 to 15 % cover
+#     "#AF7D32",  # 1216 40 to 65 % to 1 to 4 % cover
 
-    # 15–40 -> *
-    "#E3F8F4",  # 1300: "15 to 40 % to no data"  
-    "#F7D3E6",  # 1309:  "15 to 40 % cover to bare",
-    "#32AF32",  # 1310 15 to 40 % to > 65 % cover
-    "#4BB34B",  # 1312 15 to 40 % to 40 to 65 % cover
-    "#AFAFAF",  # 1313 Remained as 15 to 40 % cover
-    "#E19600",  # 1315 15 to 40 % to 4 to 15 % cover
-    "#C8AF64",  # 1316 15 to 40 % to 1 to 4 % cover
+#     # 15–40 -> *
+#     "#E3F8F4",  # 1300: "15 to 40 % to no data"  
+#     # "#F7D3E6",  # 1309:  "15 to 40 % cover to bare",
+#     "#32AF32",  # 1310 15 to 40 % to > 65 % cover
+#     "#4BB34B",  # 1312 15 to 40 % to 40 to 65 % cover
+#     "#AFAFAF",  # 1313 Remained as 15 to 40 % cover
+#     "#E19600",  # 1315 15 to 40 % to 4 to 15 % cover
+#     "#C8AF64",  # 1316 15 to 40 % to 1 to 4 % cover
 
-    # 4–15 -> *
-    "#F0F8F4",  # 1500: "14 to 15 % to no data" 
-    "#F7F4E3",  #1509:  "4 to 15 % cover to bare",
-    "#006432",  # 1510 4 to 15 % to > 65 % cover
-    "#329632",  # 1512 4 to 15 % to 40 to 65 % cover
-    "#64AF00",  # 1513 4 to 15 % to 15 to 40 % cover
-    "#C8C8C8",  # 1515 Remained as 4 to 15 % cover
-    "#FEE164",  # 1516 4 to 15 % to 1 to 4 % cover
+#     # 4–15 -> *
+#     "#F0F8F4",  # 1500: "14 to 15 % to no data" 
+#     # "#F7F4E3",  #1509:  "4 to 15 % cover to bare",
+#     "#006432",  # 1510 4 to 15 % to > 65 % cover
+#     "#329632",  # 1512 4 to 15 % to 40 to 65 % cover
+#     "#64AF00",  # 1513 4 to 15 % to 15 to 40 % cover
+#     "#C8C8C8",  # 1515 Remained as 4 to 15 % cover
+#     "#FEE164",  # 1516 4 to 15 % to 1 to 4 % cover
 
-    # 1–4 -> *
-    "#FDF8F4",  # 1600: "1 to 4 % to > 65 % cover",
-    "#F7F4EE",  # 1609: "1 to 4 % cover to bare",
-    "#003219",  # 1610 1 to 4 % to > 65 % cover
-    "#327D32",  # 1612 1 to 4 % to 40 to 65 % cover
-    "#7D9632",  # 1613 1 to 4 % to 15 to 40 % cover
-    "#96C832",  # 1615 1 to 4 % to 4 to 15 % cover
-    "#DCDCDC",  # 1616 Remained as 1 to 4 % cover
+#     # 1–4 -> *
+#     "#FDF8F4",  # 1600: "1 to 4 % to > 65 % cover",
+#     # "#F7F4EE",  # 1609: "1 to 4 % cover to bare",
+#     "#003219",  # 1610 1 to 4 % to > 65 % cover
+#     "#327D32",  # 1612 1 to 4 % to 40 to 65 % cover
+#     "#7D9632",  # 1613 1 to 4 % to 15 to 40 % cover
+#     "#96C832",  # 1615 1 to 4 % to 4 to 15 % cover
+#     "#DCDCDC",  # 1616 Remained as 1 to 4 % cover
+# ]
+
+# cover_change_labels = {
+#     0:    "No Data / Not vegetated",
+#     # 900:  "Bare to non data",
+#     # 910:  "Bare to > 65 % cover",
+#     # 912:  "Bare to to 40 to 65 % cover",
+#     # 913:  "Bare to to 15 to 40 % cover",
+#     # 915:  "Bare to 4 to 15 % cover",
+#     # 916:  "Bare to 1 to 4 % cover",
+#     1000: "> 65 % to no data", 
+#     # 1009: "> 65 % to bare",
+#     1010: "Remained as > 65 % cover",
+#     1012: "> 65 % to 40 to 65 % cover",
+#     1013: "> 65 % to 15 to 40 % cover",
+#     1015: "> 65 % to 4 to 15 % cover",
+#     1016: "> 65 % to 1 to 4 % cover",
+#     1200: "40 to 65 % to no data", 
+#     # 1209: "40 to 65 % cover to bare",
+#     1210: "40 to 65 % to > 65 % cover",
+#     1212: "Remained as 40 to 65 % cover",
+#     1213: "40 to 65 % to 15 to 40 % cover",
+#     1215: "40 to 65 % to 4 to 15 % cover",
+#     1216: "40 to 65 % to 1 to 4 % cover",
+#     1300: "15 to 40 % to no data",
+#     # 1309: "15 to 40 % cover to bare",
+#     1310: "15 to 40 % to > 65 % cover",
+#     1312: "15 to 40 % to 40 to 65 % cover",
+#     1313: "Remained as 15 to 40 % cover",
+#     1315: "15 to 40 % to 4 to 15 % cover",
+#     1316: "15 to 40 % to 1 to 4 % cover",
+#     1500: "14 to 15 % to no data",
+#     # 1509: "4 to 15 % cover to bare",
+#     1510: "4 to 15 % to > 65 % cover",
+#     1512: "4 to 15 % to 40 to 65 % cover",
+#     1513: "4 to 15 % to 15 to 40 % cover",
+#     1515: "Remained as 4 to 15 % cover",
+#     1516: "4 to 15 % to 1 to 4 % cover",
+#     1600: "1 to 4 % to > 65 % cover",
+#     # 1609: "1 to 4 % cover to bare",
+#     1610: "1 to 4 % to > 65 % cover",
+#     1612: "1 to 4 % to 40 to 65 % cover",
+#     1613: "1 to 4 % to 15 to 40 % cover",
+#     1615: "1 to 4 % to 4 to 15 % cover",
+#     1616: "Remained as 1 to 4 % cover",
+# }
+
+cover_change_colours = [
+    "#FFFFFF",  # 0
+
+    # 1000–1016
+    "#D1F8E7",  # 1000
+    "#7D7D7D",  # 1010
+    "#E1AF19",  # 1012
+    "#C87D19",  # 1013
+    "#964B00",  # 1015
+    "#644B19",  # 1016
+
+    # 1200–1216
+    "#D1F8F4",  # 1200
+    "#4BC864",  # 1210
+    "#969696",  # 1212
+    "#FA964B",  # 1213
+    "#C87D4B",  # 1215
+    "#AF7D32",  # 1216
+
+    # 1300–1316
+    "#E3F8F4",  # 1300
+    "#32AF32",  # 1310
+    "#4BB34B",  # 1312
+    "#AFAFAF",  # 1313
+    "#E19600",  # 1315
+    "#C8AF64",  # 1316
+
+    # 1500–1516
+    "#F0F8F4",  # 1500
+    "#006432",  # 1510
+    "#329632",  # 1512
+    "#64AF00",  # 1513
+    "#C8C8C8",  # 1515
+    "#FEE164",  # 1516
+
+    # 1600–1616
+    "#FDF8F4",  # 1600
+    "#003219",  # 1610
+    "#327D32",  # 1612
+    "#7D9632",  # 1613
+    "#96C832",  # 1615
+    "#DCDCDC",  # 1616
 ]
 
 cover_change_labels = {
-    0:    "No Data / Not vegetated",
-    900:  "Bare to non data",
-    910:  "Bare to > 65 % cover",
-    912:  "Bare to to 40 to 65 % cover",
-    913:  "Bare to to 15 to 40 % cover",
-    915:  "Bare to 4 to 15 % cover",
-    916:  "Bare to 1 to 4 % cover",
-    1000: "> 65 % to no data", 
-    1009: "> 65 % to bare",
+    0: "No Data / Not vegetated",
+
+    1000: "> 65 % to no data",
     1010: "Remained as > 65 % cover",
     1012: "> 65 % to 40 to 65 % cover",
     1013: "> 65 % to 15 to 40 % cover",
     1015: "> 65 % to 4 to 15 % cover",
     1016: "> 65 % to 1 to 4 % cover",
-    1200: "40 to 65 % to no data", 
-    1209: "40 to 65 % cover to bare",
+
+    1200: "40 to 65 % to no data",
     1210: "40 to 65 % to > 65 % cover",
     1212: "Remained as 40 to 65 % cover",
     1213: "40 to 65 % to 15 to 40 % cover",
     1215: "40 to 65 % to 4 to 15 % cover",
     1216: "40 to 65 % to 1 to 4 % cover",
+
     1300: "15 to 40 % to no data",
-    1309: "15 to 40 % cover to bare",
     1310: "15 to 40 % to > 65 % cover",
     1312: "15 to 40 % to 40 to 65 % cover",
     1313: "Remained as 15 to 40 % cover",
     1315: "15 to 40 % to 4 to 15 % cover",
     1316: "15 to 40 % to 1 to 4 % cover",
-    1500: "14 to 15 % to no data",
-    1509: "4 to 15 % cover to bare",
+
+    1500: "4 to 15 % to no data",   # FIXED
     1510: "4 to 15 % to > 65 % cover",
     1512: "4 to 15 % to 40 to 65 % cover",
     1513: "4 to 15 % to 15 to 40 % cover",
     1515: "Remained as 4 to 15 % cover",
     1516: "4 to 15 % to 1 to 4 % cover",
+
     1600: "1 to 4 % to > 65 % cover",
-    1609: "1 to 4 % cover to bare",
     1610: "1 to 4 % to > 65 % cover",
     1612: "1 to 4 % to 40 to 65 % cover",
     1613: "1 to 4 % to 15 to 40 % cover",
@@ -1179,6 +1284,8 @@ waterper_change_colours = [
     "#C8FAFA",  # 98 1-3 months to 4-6 months
     "#C8C8C8",  # 99 Remained as 1-3 months
 ]
+
+
 
 # Labels for water persistence
 waterpersistence_labels = {
